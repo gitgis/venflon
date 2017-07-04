@@ -1,0 +1,32 @@
+{
+  "name": "venflon",
+  "version": "0.0.1",
+  "description": "Lightweight dependency injection framework for Frontend/Backend",
+  "main": "dist/venflon.js",
+  "types": "index.d.ts",
+  "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^7.0.8",
+    "babel-core": "^6.22.0",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "dts-bundle": "^0.7.2",
+    "mocha": "^3.3.0",
+    "mocha-webpack": "^0.7.0",
+    "raw-loader": "^0.5.1",
+    "ts-loader": "1.3.3",
+    "typescript": "2.2.1",
+    "webpack": "2.3.1",
+    "webpack-node-externals": "^1.5.4"
+  },
+  "dependencies": {
+  },
+  "scripts": {
+    "prepublish": "webpack -p",
+    "test": "mocha-webpack",
+    "build": "webpack"
+  },
+  "author": "Grzegorz Godlewski <gg@gitgis.com>",
+  "license": "MIT"
+}
