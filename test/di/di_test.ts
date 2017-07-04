@@ -36,6 +36,7 @@ describe('Module', function() {
             done();
         });
     });
+
     describe('#inherit()', function() {
         it('should inherit', function(done) {
 
@@ -57,7 +58,5 @@ describe('Module', function() {
             done();
         });
     });
-
-
 
 });
