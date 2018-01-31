@@ -4,6 +4,7 @@ export type Callback = () => any;
 export class Injector {
     constructor(parentInjector?: Injector);
     get(name: any): any;
+    getAll(): {} & {};
     bind(name: string, callback: Callback): void;
     bindSingleton(name: string, singleton: any): void;
     register(module: AbstractModule): void;
