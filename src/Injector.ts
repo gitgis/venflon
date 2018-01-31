@@ -21,7 +21,7 @@ export class Injector {
         return this.map[name]();
     }
 
-    private getAll() {
+    public getAll() {
         return Object.assign({}, this.map);
     }
 
