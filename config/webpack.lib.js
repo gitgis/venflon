@@ -1,94 +1,49 @@
 'use strict';
 
-const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
-
-function DtsBundlePlugin() {}
-DtsBundlePlugin.prototype.apply = function (compiler) {
-    compiler.plugin('done', function () {
-        var dts = require('dts-bundle');
-
-        dts.bundle({
-            name: 'venflon',
-            main: __dirname + '/../dist/src/main.d.ts',
-            out: __dirname + '/../index.d.ts',
-            removeSource: true,
-            outputAsModuleFolder: true
-        });
-    });
-};
+const path = require('path');
 
 const config = {
-    target: 'node',
-    context: __dirname + '/../src',
+    target: 'TO_SET',
+    context: path.resolve(__dirname, '..', 'src'),
     entry: {
         'venflon': ['./main.ts']
     },
+    devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : undefined,
     output: {
-        path: __dirname + '/../dist',
-        filename: '[name].js',
-        library: 'venflon',
-        libraryTarget: 'umd',
-        umdNamedDefine: true
+        path: path.resolve(__dirname, '..', 'dist'),
     },
     resolve: {
-        extensions: [ '.js', '.ts'],
-        modules: [
-            __dirname+'/../src',
-            __dirname+'/../node_modules'
-        ]
+        extensions: [ '.js', '.ts']
     },
-    externals: [nodeExternals()],
     module: {
-        noParse: /es6-promise\.js$/, // avoid webpack shimming process
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
-                query: {
-                    "presets": [
-                        ["es2015", {"modules": false}]
-                    ],
-                    "plugins": ["transform-es2015-modules-commonjs"]
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
                 }
             },
             {
                 test: /\.ts$/,
-                loaders: [
-                    {
-                        loader: 'babel-loader',
-                        query: {
-                            "presets": [
-                                ["es2015", {"modules": false}]
-                            ],
-                            "plugins": ["transform-es2015-modules-commonjs"]
-                        }
-                    },
-                    {
-                        loader: 'ts-loader'
-                    }
-                ]
+                exclude: /node_modules/,
+                use: 'ts-loader',
             }
-        ]
-    },
-    plugins: [
-        new DtsBundlePlugin(),
-        new webpack.optimize.UglifyJsPlugin({ minimize: true })
-    ],
-    performance: {
-        hints: process.env.NODE_ENV === 'production' ? 'warning' : false
-    },
-    node: {
-        // global: 'window',
-        crypto: 'empty',
-        process: true,
-        module: false,
-        clearImmediate: false,
-        setImmediate: false,
-        __dirname: false,
-        __filename: false,
+        ],
     }
 };
 
-module.exports = config;
+module.exports = [
+    Object.assign({}, config, {
+        target: 'node',
+        output: Object.assign({}, config.output, {
+            filename: '[name].node.js'
+        })
+    }),
+    Object.assign({}, config, {
+        target: 'web',
+        output: Object.assign({}, config.output, {
+            filename: '[name].web.js'
+        })
+    })
+];

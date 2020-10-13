@@ -1,4 +1,4 @@
-import {AbstractModule, Injector} from "main";
+import {AbstractModule, Injector} from "../src/main";
 
 export class ChildModule implements AbstractModule {
 

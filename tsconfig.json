@@ -1,27 +1,18 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "baseUrl": ".",
     "paths": {
-      "*" : [ "src/*" ]
+      "*": [
+        "src/*"
+      ]
     },
-    "outDir": "./dist/",
+    "outDir": "dist",
+    "module": "es6",
     "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "lib": ["es6", "dom"],
-    "removeComments": true,
-    "inlineSourceMap": true,
-    "sourceMap": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "types": ["node"],
-    "typeRoots": [ "node_modules/@types/" ]
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "dist",
+    "sourceMap": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "compileOnSave": false,
-  "buildOnSave": false
+  "exclude": ["test"]
 }

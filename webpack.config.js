@@ -1,3 +1,3 @@
-const libConfig = require(__dirname+'/config/webpack.lib');
+const libConfig = require('./config/webpack.lib');
 
 module.exports = libConfig;

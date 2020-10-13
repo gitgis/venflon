@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import * as assert from "assert";
 
-import {Injector} from "main";
+import {Injector} from "../../src/main";
 import {MainModule} from "../MainModule";
 import {ChildModule} from "../ChildModule";
 
